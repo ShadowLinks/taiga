@@ -107,6 +107,7 @@ static const std::vector<StreamData> stream_data{
       "^\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}:32400/web/|"
       "^plex\\.[a-z0-9-]+\\.[a-z0-9-]+|"
       "^[^/]*[a-z0-9-]+\\.[a-z0-9-]+/plex"
+      "^tower.local:32400/web/|"
     ),
     std::regex(u8"Plex|(?:\u25B6 )?(.+)"),
   },

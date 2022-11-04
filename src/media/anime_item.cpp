@@ -118,12 +118,20 @@ const std::vector<std::wstring>& Item::GetProducers() const {
   return series_.producers;
 }
 
+const std::vector<std::wstring>& Item::GetStudios() const {
+  return series_.studios;
+}
+
 double Item::GetScore() const {
   return series_.score;
 }
 
 const std::wstring& Item::GetSynopsis() const {
   return series_.synopsis;
+}
+
+const std::wstring& Item::GetTrailerId() const {
+  return series_.trailer_id;
 }
 
 const time_t Item::GetLastModified() const {
@@ -279,12 +287,28 @@ void Item::SetProducers(const std::vector<std::wstring>& producers) {
   series_.producers = producers;
 }
 
+void Item::SetStudios(const std::wstring& studios) {
+  std::vector<std::wstring> temp;
+  Split(studios, L", ", temp);
+  RemoveEmptyStrings(temp);
+
+  SetStudios(temp);
+}
+
+void Item::SetStudios(const std::vector<std::wstring>& studios) {
+  series_.studios = studios;
+}
+
 void Item::SetScore(double score) {
   series_.score = score > 0.0 ? static_cast<float>(score) : 0.0f;
 }
 
 void Item::SetSynopsis(const std::wstring& synopsis) {
   series_.synopsis = synopsis;
+}
+
+void Item::SetTrailerId(const std::wstring& trailer_id) {
+  series_.trailer_id = trailer_id;
 }
 
 void Item::SetLastModified(time_t modified) {
@@ -402,16 +426,6 @@ const std::wstring& Item::GetMyLastUpdated() const {
   return my_info_->last_updated;
 }
 
-const std::wstring& Item::GetMyTags(bool check_queue) const {
-  if (!my_info_.get())
-    return EmptyString();
-
-  library::QueueItem* queue_item = check_queue ?
-      SearchQueue(library::QueueSearch::Tags) : nullptr;
-
-  return queue_item ? *queue_item->tags : my_info_->tags;
-}
-
 const std::wstring& Item::GetMyNotes(bool check_queue) const {
   if (!my_info_.get())
     return EmptyString();
@@ -496,12 +510,6 @@ void Item::SetMyLastUpdated(const std::wstring& last_updated) {
   assert(my_info_.get());
 
   my_info_->last_updated = last_updated;
-}
-
-void Item::SetMyTags(const std::wstring& tags) {
-  assert(my_info_.get());
-
-  my_info_->tags = tags;
 }
 
 void Item::SetMyNotes(const std::wstring& notes) {

@@ -208,6 +208,8 @@ public:
   void SetStreamAdn(const bool enabled);
   bool GetStreamAnn() const;
   void SetStreamAnn(const bool enabled);
+  bool GetStreamBilibili() const;
+  void SetStreamBilibili(const bool enabled);
   bool GetStreamCrunchyroll() const;
   void SetStreamCrunchyroll(const bool enabled);
   bool GetStreamFunimation() const;
@@ -238,6 +240,8 @@ public:
   void SetShareDiscordEnabled(const bool enabled);
   bool GetShareDiscordGroupEnabled() const;
   void SetShareDiscordGroupEnabled(const bool enabled);
+  bool GetShareDiscordTimeEnabled() const;
+  void SetShareDiscordTimeEnabled(const bool enabled);
   bool GetShareDiscordUsernameEnabled() const;
   void SetShareDiscordUsernameEnabled(const bool enabled);
   bool GetShareHttpEnabled() const;
@@ -268,6 +272,8 @@ public:
   void SetShareTwitterOauthToken(const std::wstring& oauth_token);
   std::wstring GetShareTwitterOauthSecret() const;
   void SetShareTwitterOauthSecret(const std::wstring& oauth_secret);
+  std::wstring GetShareTwitterReplyTo() const;
+  void SetShareTwitterReplyTo(const std::wstring& status_id);
   std::wstring GetShareTwitterUsername() const;
   void SetShareTwitterUsername(const std::wstring& username);
 

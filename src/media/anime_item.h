@@ -61,8 +61,10 @@ public:
   const std::vector<std::wstring>& GetTags() const;
   int GetPopularity() const;
   const std::vector<std::wstring>& GetProducers() const;
+  const std::vector<std::wstring>& GetStudios() const;
   double GetScore() const;
   const std::wstring& GetSynopsis() const;
+  const std::wstring& GetTrailerId() const;
   const time_t GetLastModified() const;
   int GetLastAiredEpisodeNumber() const;
   time_t GetNextEpisodeTime() const;
@@ -93,8 +95,11 @@ public:
   void SetPopularity(int popularity);
   void SetProducers(const std::wstring& producers);
   void SetProducers(const std::vector<std::wstring>& producers);
+  void SetStudios(const std::wstring& studios);
+  void SetStudios(const std::vector<std::wstring>& studios);
   void SetScore(double score);
   void SetSynopsis(const std::wstring& synopsis);
+  void SetTrailerId(const std::wstring& trailer_id);
   void SetLastModified(time_t modified);
   void SetLastAiredEpisodeNumber(int number);
   void SetNextEpisodeTime(const time_t time);
@@ -113,7 +118,6 @@ public:
   const Date& GetMyDateStart(bool check_queue = true) const;
   const Date& GetMyDateEnd(bool check_queue = true) const;
   const std::wstring& GetMyLastUpdated() const;
-  const std::wstring& GetMyTags(bool check_queue = true) const;
   const std::wstring& GetMyNotes(bool check_queue = true) const;
 
   void SetMyId(const std::wstring& id);
@@ -129,7 +133,6 @@ public:
   void SetMyDateEnd(const Date& date);
   void SetMyDateEnd(const std::wstring& date);
   void SetMyLastUpdated(const std::wstring& last_updated);
-  void SetMyTags(const std::wstring& tags);
   void SetMyNotes(const std::wstring& notes);
 
   //////////////////////////////////////////////////////////////////////////////

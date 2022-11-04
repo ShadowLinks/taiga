@@ -93,6 +93,7 @@ enum class AppSettingKey {
   StreamAnimelab,
   StreamAdn,
   StreamAnn,
+  StreamBilibili,
   StreamCrunchyroll,
   StreamFunimation,
   StreamHidive,
@@ -109,6 +110,7 @@ enum class AppSettingKey {
   ShareDiscordApplicationId,
   ShareDiscordEnabled,
   ShareDiscordGroupEnabled,
+  ShareDiscordTimeEnabled,
   ShareDiscordUsernameEnabled,
   ShareHttpEnabled,
   ShareHttpFormat,
@@ -124,6 +126,7 @@ enum class AppSettingKey {
   ShareTwitterFormat,
   ShareTwitterOauthToken,
   ShareTwitterOauthSecret,
+  ShareTwitterReplyTo,
   ShareTwitterUsername,
 
   // Torrents

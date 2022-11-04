@@ -127,9 +127,11 @@ struct SeriesInformation {
   std::wstring image_url;
   std::wstring slug;
   std::wstring synopsis;
+  std::wstring trailer_id;
   Titles titles;
   std::vector<std::wstring> genres;
   std::vector<std::wstring> producers;
+  std::vector<std::wstring> studios;
   std::vector<std::wstring> tags;
   int last_aired_episode = 0;
   std::time_t next_episode_time = 0;
@@ -147,7 +149,6 @@ struct MyInformation {
   Date date_start;
   Date date_finish;
   std::wstring last_updated;
-  std::wstring tags;
   std::wstring notes;
 };
 

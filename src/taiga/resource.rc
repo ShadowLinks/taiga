@@ -99,8 +99,8 @@ FONT 9, "Segoe UI", 400, 0, 0
     COMBOBOX        IDC_COMBO_ANIME_SCORE, 122, 54, 100, 30, WS_TABSTOP | CBS_DROPDOWNLIST | CBS_HASSTRINGS, WS_EX_LEFT
     EDITTEXT        IDC_EDIT_ANIME_SCORE, 122, 54, 100, 12, NOT WS_VISIBLE | ES_AUTOHSCROLL, WS_EX_LEFT
     CONTROL         "", IDC_SPIN_ANIME_SCORE, UPDOWN_CLASS, NOT WS_VISIBLE | UDS_ALIGNRIGHT | UDS_ARROWKEYS | UDS_NOTHOUSANDS | UDS_AUTOBUDDY, 212, 54, 12, 12, WS_EX_LEFT
-    LTEXT           "Tags:", IDC_STATIC_TAGSNOTES, 7, 74, 100, 8, SS_LEFT, WS_EX_LEFT
-    EDITTEXT        IDC_EDIT_ANIME_TAGS, 7, 84, 341, 12, ES_AUTOHSCROLL, WS_EX_LEFT
+    LTEXT           "Notes:", IDC_STATIC_TAGSNOTES, 7, 74, 100, 8, SS_LEFT, WS_EX_LEFT
+    EDITTEXT        IDC_EDIT_ANIME_NOTES, 7, 84, 341, 12, ES_AUTOHSCROLL, WS_EX_LEFT
     LTEXT           "Date started:", IDC_STATIC, 7, 103, 100, 8, SS_LEFT, WS_EX_LEFT
     CONTROL         "", IDC_DATETIME_START, DATETIMEPICK_CLASS, WS_TABSTOP | DTS_SHOWNONE, 7, 113, 100, 12, WS_EX_LEFT
     LTEXT           "Date completed:", IDC_STATIC, 122, 103, 100, 8, SS_LEFT, WS_EX_LEFT
@@ -535,10 +535,11 @@ EXSTYLE WS_EX_CONTROLPARENT
 FONT 9, "Segoe UI", 400, 0, 0
 {
     AUTOCHECKBOX    "Update rich presence", IDC_CHECK_DISCORD, 7, 7, 100, 8, 0, WS_EX_LEFT
-    GROUPBOX        "Options", IDC_STATIC, 7, 22, 301, 37, 0, WS_EX_LEFT
+    GROUPBOX        "Options", IDC_STATIC, 7, 22, 301, 48, 0, WS_EX_LEFT
     AUTOCHECKBOX    "Display username in tooltip", IDC_CHECK_DISCORD_USERNAME, 13, 33, 135, 8, 0, WS_EX_LEFT
     AUTOCHECKBOX    "Display episode release group", IDC_CHECK_DISCORD_GROUP, 13, 44, 135, 8, 0, WS_EX_LEFT
-    LTEXT           "Note: Requires using the Discord desktop client. ""Display currently running game as a status message"" option must be enabled, but do not add Taiga as a game. Updates may be delayed for 15 seconds, in addition to the delay time setting at Recognition page.", IDC_STATIC, 7, 66, 301, 26, SS_LEFT, WS_EX_TRANSPARENT
+    AUTOCHECKBOX    "Display elapsed time", IDC_CHECK_DISCORD_TIME, 13, 55, 135, 8, 0, WS_EX_LEFT
+    LTEXT           "Note: Requires using the Discord desktop client. ""Display currently running game as a status message"" option must be enabled, but do not add Taiga as a game. Updates may be delayed for 15 seconds, in addition to the delay time setting at Recognition page.", IDC_STATIC, 7, 77, 301, 26, SS_LEFT, WS_EX_TRANSPARENT
 }
 
 

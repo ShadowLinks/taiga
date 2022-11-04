@@ -47,15 +47,14 @@
 namespace taiga {
 
 constexpr auto kDefaultExternalLinks =
-    L"Hibari|https://hb.wopian.me\r\n"
-    L"MALgraph|http://graph.anime.plus\r\n"
+    L"MALgraph|https://anime.plus/\r\n"
     L"-\r\n"
-    L"AniChart|http://anichart.net/airing\r\n"
+    L"AniChart|https://anichart.net/airing\r\n"
     L"Monthly.moe|https://www.monthly.moe/weekly\r\n"
-    L"Senpai Anime Charts|http://www.senpai.moe/?mode=calendar\r\n"
+    L"Senpai Anime Charts|https://www.senpai.moe/?mode=calendar\r\n"
     L"-\r\n"
-    L"Anime Streaming Search Engine|http://because.moe\r\n"
-    L"The Fansub Database|https://fansubdb.com";
+    L"Anime Scene Search Engine|https://trace.moe/\r\n"
+    L"Anime Streaming Search Engine|https://because.moe/";
 constexpr auto kDefaultFormatHttp =
     L"user=%user%"
     L"&name=%title%"
@@ -165,6 +164,7 @@ void Settings::InitKeyMap() const {
       {AppSettingKey::StreamAnimelab, {"recognition/streaming/providers/animelab", true}},
       {AppSettingKey::StreamAdn, {"recognition/streaming/providers/adn", true}},
       {AppSettingKey::StreamAnn, {"recognition/streaming/providers/ann", true}},
+      {AppSettingKey::StreamBilibili, {"recognition/streaming/providers/bilibili", true}},
       {AppSettingKey::StreamCrunchyroll, {"recognition/streaming/providers/crunchyroll", true}},
       {AppSettingKey::StreamFunimation, {"recognition/streaming/providers/funimation", true}},
       {AppSettingKey::StreamHidive, {"recognition/streaming/providers/hidive", true}},
@@ -181,6 +181,7 @@ void Settings::InitKeyMap() const {
       {AppSettingKey::ShareDiscordApplicationId, {"announce/discord/applicationid", std::wstring{link::discord::kApplicationId}}},
       {AppSettingKey::ShareDiscordEnabled, {"announce/discord/enabled", false}},
       {AppSettingKey::ShareDiscordGroupEnabled, {"announce/discord/groupenabled", true}},
+      {AppSettingKey::ShareDiscordTimeEnabled, {"announce/discord/timeenabled", true}},
       {AppSettingKey::ShareDiscordUsernameEnabled, {"announce/discord/usernameenabled", true}},
       {AppSettingKey::ShareHttpEnabled, {"announce/http/enabled", false}},
       {AppSettingKey::ShareHttpFormat, {"announce/http/format", std::wstring{kDefaultFormatHttp}}},
@@ -196,6 +197,7 @@ void Settings::InitKeyMap() const {
       {AppSettingKey::ShareTwitterFormat, {"announce/twitter/format", std::wstring{kDefaultFormatTwitter}}},
       {AppSettingKey::ShareTwitterOauthToken, {"announce/twitter/oauth_token", std::wstring{}}},
       {AppSettingKey::ShareTwitterOauthSecret, {"announce/twitter/oauth_secret", std::wstring{}}},
+      {AppSettingKey::ShareTwitterReplyTo, {"announce/twitter/reply_to", std::wstring{}}},
       {AppSettingKey::ShareTwitterUsername, {"announce/twitter/user", std::wstring{}}},
 
       // Torrents
@@ -865,6 +867,14 @@ void Settings::SetStreamAnn(const bool enabled) {
   set_value(AppSettingKey::StreamAnn, enabled);
 }
 
+bool Settings::GetStreamBilibili() const {
+  return value<bool>(AppSettingKey::StreamBilibili);
+}
+
+void Settings::SetStreamBilibili(const bool enabled) {
+  set_value(AppSettingKey::StreamBilibili, enabled);
+}
+
 bool Settings::GetStreamCrunchyroll() const {
   return value<bool>(AppSettingKey::StreamCrunchyroll);
 }
@@ -986,6 +996,14 @@ void Settings::SetShareDiscordGroupEnabled(const bool enabled) {
   set_value(AppSettingKey::ShareDiscordGroupEnabled, enabled);
 }
 
+bool Settings::GetShareDiscordTimeEnabled() const {
+  return value<bool>(AppSettingKey::ShareDiscordTimeEnabled);
+}
+
+void Settings::SetShareDiscordTimeEnabled(const bool enabled) {
+  set_value(AppSettingKey::ShareDiscordTimeEnabled, enabled);
+}
+
 bool Settings::GetShareDiscordUsernameEnabled() const {
   return value<bool>(AppSettingKey::ShareDiscordUsernameEnabled);
 }
@@ -1104,6 +1122,14 @@ std::wstring Settings::GetShareTwitterOauthSecret() const {
 
 void Settings::SetShareTwitterOauthSecret(const std::wstring& oauth_secret) {
   set_value(AppSettingKey::ShareTwitterOauthSecret, oauth_secret);
+}
+
+std::wstring Settings::GetShareTwitterReplyTo() const {
+  return value<std::wstring>(AppSettingKey::ShareTwitterReplyTo);
+}
+
+void Settings::SetShareTwitterReplyTo(const std::wstring& status_id) {
+  set_value(AppSettingKey::ShareTwitterReplyTo, status_id);
 }
 
 std::wstring Settings::GetShareTwitterUsername() const {

@@ -137,7 +137,9 @@
 		<item name="Set &amp;episode..."  action="EditEpisode()"/>
 		<item name="Set sco&amp;re"          sub="EditScore"/>
 		<item name="Set &amp;status"         sub="EditStatus"/>
-		<item name="Set &amp;tags..."     action="EditTags"/> <!-- Note: Overwritten -->
+		<item name="Set &amp;notes..."    action="EditNotes"/>
+		<item type="separator"/>
+		<item name="In&amp;vert selection" action="InvertSelection"/>
 		<item type="separator"/>
 		<item name="Delete from &amp;list...&#9;Del" action="EditDelete()"/>
 	</menu>
@@ -206,6 +208,7 @@
 		<item name="Last updated" action="user_last_updated" checked="1"/>
 		<item name="Progress" action="user_progress" checked="1"/>
 		<item name="Score" action="user_rating" checked="1"/>
+		<item name="Notes" action="user_notes" checked="1"/>
 		<item type="separator"/>
 		<item name="Reset to defaults" action="ResetAnimeListHeaders()"/>
 	</menu>
@@ -257,6 +260,7 @@
 	<menu name="SeasonList">
 		<item name="Information" action="Info()" default="1"/>
 		<item name="Go to the web page" action="ViewAnimePage()"/>
+		<item name="Watch trailer" action="WatchTrailer()" disabled="1"/>
 		<item type="separator"/>
 		<item name="Refresh data" action="Season_RefreshItemData()"/>
 		<item type="separator"/>

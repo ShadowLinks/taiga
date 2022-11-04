@@ -41,7 +41,7 @@
 namespace sync::anilist {
 
 // API documentation:
-// https://anilist.gitbooks.io/anilist-apiv2-docs/
+// https://anilist.gitbook.io/anilist-apiv2-docs/
 // https://anilist.github.io/ApiV2-GraphQL-Docs/
 
 constexpr auto kBaseUrl = "https://graphql.anilist.co";
@@ -235,6 +235,11 @@ int ParseMediaObject(const Json& json) {
 
   ParseMediaTitleObject(json, anime_item);
 
+  const auto& trailer = json["trailer"];
+  const auto trailer_id = StrToWstr(JsonReadStr(trailer, "id"));
+  const auto trailer_site = JsonReadStr(trailer, "site");
+  anime_item.SetTrailerId(trailer_site == "youtube" ? trailer_id : L"");
+
   std::vector<std::wstring> genres;
   for (const auto& genre : json["genres"]) {
     if (genre.is_string())
@@ -249,12 +254,20 @@ int ParseMediaObject(const Json& json) {
   }
   anime_item.SetSynonyms(synonyms);
 
+  std::vector<std::wstring> producers;
   std::vector<std::wstring> studios;
   for (const auto& edge : json["studios"]["edges"]) {
-    studios.push_back(StrToWstr(JsonReadStr(edge["node"], "name")));
+    const auto name = StrToWstr(JsonReadStr(edge["node"], "name"));
+    if (JsonReadBool(edge, "isMain")) {
+      studios.push_back(name);
+    } else {
+      producers.push_back(name);
+    }
   }
+  RemoveEmptyStrings(producers);
   RemoveEmptyStrings(studios);
-  anime_item.SetProducers(studios);
+  anime_item.SetProducers(producers);
+  anime_item.SetStudios(studios);
 
   const auto& next_airing_episode = json["nextAiringEpisode"];
   if (!next_airing_episode.is_null()) {

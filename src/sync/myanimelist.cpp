@@ -43,7 +43,8 @@
 
 namespace sync::myanimelist {
 
-// @TODO: Link to API documentation when available
+// API documentation:
+// https://myanimelist.net/apiconfig/references/api/v2
 
 struct Error {
   enum class Type {
@@ -239,7 +240,6 @@ std::wstring GetListStatusFields() {
          L"score,"
          L"start_date,"
          L"status,"
-         L"tags,"
          L"updated_at";
 }
 
@@ -321,7 +321,8 @@ int ParseAnimeObject(const Json& json) {
     return names;
   };
   anime_item.SetGenres(get_names(json, "genres"));
-  anime_item.SetProducers(get_names(json, "studios"));
+  anime_item.SetProducers(std::vector<std::wstring>{});
+  anime_item.SetStudios(get_names(json, "studios"));
 
   Meow.UpdateTitles(anime_item);
 
@@ -350,16 +351,6 @@ void ParseLibraryObject(const Json& json, const int anime_id) {
   anime_item.SetMyNotes(StrToWstr(JsonReadStr(json, "comments")));
   anime_item.SetMyLastUpdated(
       TranslateMyLastUpdatedFrom(JsonReadStr(json, "updated_at")));
-
-  std::vector<std::wstring> tags;
-  if (json.contains("tags") && json["tags"].is_array()) {
-    for (const auto& tag : json["tags"]) {
-      if (tag.is_string()) {
-        tags.push_back(StrToWstr(tag.get<std::string>()));
-      }
-    }
-  }
-  anime_item.SetMyTags(Join(tags, L", "));
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -781,8 +772,6 @@ void UpdateLibraryEntry(const library::QueueItem& queue_item) {
     params.add("is_rewatching", ToStr(*queue_item.enable_rewatching));
   if (queue_item.rewatched_times)
     params.add("num_times_rewatched", ToStr(*queue_item.rewatched_times));
-  if (queue_item.tags)
-    params.add("tags", WstrToStr(*queue_item.tags));
   if (queue_item.notes)
     params.add("comments", WstrToStr(*queue_item.notes));
 
